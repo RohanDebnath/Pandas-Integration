@@ -22,20 +22,23 @@ public class ComparisonActivity extends AppCompatActivity {
         // Get data from the intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String studentName = extras.getString("studentName");
-            String xMarks = extras.getString("xMarks");
-            String xiiMarks = extras.getString("xiiMarks");
+            List<String> allApplicationDetails = extras.getStringArrayList("allApplicationDetails");
+            int selectedPosition = extras.getInt("selectedPosition");
+
+            // Retrieve details for the selected student
+            String selectedStudentDetails = allApplicationDetails.get(selectedPosition);
+            String[] selectedDetails = selectedStudentDetails.split(",");
 
             // Set the title of the activity with student name
-            setTitle(studentName);
+            setTitle("Comparison for " + selectedDetails[0]);
 
             // Create BarChart
             BarChart barChart = findViewById(R.id.barChart);
 
-            // Create entries for class 10 and 12 marks
+            // Create entries for class 10 and 12 marks for the selected student
             List<BarEntry> entries = new ArrayList<>();
-            entries.add(new BarEntry(0, Float.parseFloat(xMarks)));
-            entries.add(new BarEntry(1, Float.parseFloat(xiiMarks)));
+            entries.add(new BarEntry(0, Float.parseFloat(selectedDetails[1])));
+            entries.add(new BarEntry(1, Float.parseFloat(selectedDetails[2])));
 
             // Create dataset for BarChart
             BarDataSet dataSet = new BarDataSet(entries, "Marks");
