@@ -1,5 +1,7 @@
 package com.example.pandasintegration;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,10 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<String> applicationDetails;
+    private Context context;
 
-    public MyAdapter(List<String> applicationDetails) {
+    public MyAdapter(Context context, List<String> applicationDetails) {
+        this.context = context;
         this.applicationDetails = applicationDetails;
     }
 
@@ -31,6 +35,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.textViewXMarks.setText("X Marks: " + details[1]);
         holder.textViewXIIMarks.setText("XII Marks: " + details[2]);
         holder.textViewCurricularActivities.setText("Curricular Activities: " + details[3]);
+
+        // Set click listener for the item
+        holder.itemView.setOnClickListener(v -> {
+            // Extract relevant data for the clicked student
+            String studentName = details[0];
+            String xMarks = details[1];
+            String xiiMarks = details[2];
+
+            // Start a new activity or dialog to show graphical comparison
+            Intent intent = new Intent(context, ComparisonActivity.class);
+            intent.putExtra("studentName", studentName);
+            intent.putExtra("xMarks", xMarks);
+            intent.putExtra("xiiMarks", xiiMarks);
+            context.startActivity(intent);
+        });
     }
 
     @Override

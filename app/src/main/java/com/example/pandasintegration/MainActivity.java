@@ -1,11 +1,11 @@
 package com.example.pandasintegration;
 
+import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.TextView;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        MyAdapter adapter = new MyAdapter(applicationDetails);
+        MyAdapter adapter = new MyAdapter(this,applicationDetails);
         recyclerView.setAdapter(adapter);
     }
 }
