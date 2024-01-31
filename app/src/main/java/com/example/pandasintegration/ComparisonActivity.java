@@ -1,13 +1,16 @@
 package com.example.pandasintegration;
 
+import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.github.mikephil.charting.charts.BarChart;
+
+import com.github.mikephil.charting.charts.ScatterChart;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.ScatterData;
+import com.github.mikephil.charting.data.ScatterDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,34 +35,47 @@ public class ComparisonActivity extends AppCompatActivity {
             // Set the title of the activity with student name
             setTitle("Comparison for " + selectedDetails[0]);
 
-            // Create BarChart
-            BarChart barChart = findViewById(R.id.barChart);
+            // Create ScatterChart
+            ScatterChart scatterChart = findViewById(R.id.scatterChart);
 
-            // Create entries for class 10 and 12 marks for the selected student
-            List<BarEntry> entries = new ArrayList<>();
-            entries.add(new BarEntry(0, Float.parseFloat(selectedDetails[1])));
-            entries.add(new BarEntry(1, Float.parseFloat(selectedDetails[2])));
+            // Create entries for class 10 and 12 marks for all students
+            // Create entries for class 10 and 12 marks for all students
+            List<Entry> entries = new ArrayList<>();
+            for (int i = 0; i < allApplicationDetails.size(); i++) {
+                String[] details = allApplicationDetails.get(i).split(",");
 
-            // Create dataset for BarChart
-            BarDataSet dataSet = new BarDataSet(entries, "Marks");
-            BarData barData = new BarData(dataSet);
+                // Skip the header row or any non-numeric values
+                try {
+                    float xMark = Float.parseFloat(details[1]);
+                    float xiiMark = Float.parseFloat(details[2]);
+
+                    // Add entry for each student
+                    entries.add(new Entry(xMark, xiiMark));
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    e.printStackTrace(); // Log the exception or handle it as needed
+                }
+            }
+
+            // Create dataset for ScatterChart
+            ScatterDataSet dataSet = new ScatterDataSet(entries, "Other Students");
+            dataSet.setColors(Color.BLUE); // Set color for blue dots
+            dataSet.setScatterShape(ScatterChart.ScatterShape.CIRCLE); // Set shape of the dots
+
+            // Highlight the selected student with a red dot
+            dataSet.getEntryForIndex(selectedPosition).setIcon(getResources().getDrawable(R.drawable.red_dot));
 
             // Customize X-axis
-            XAxis xAxis = barChart.getXAxis();
-            xAxis.setValueFormatter(new CustomXAxisValueFormatter());
+            XAxis xAxis = scatterChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-            // Set data to the BarChart
-            barChart.setData(barData);
-            barChart.invalidate(); // refresh chart
-        }
-    }
+            // Customize Y-axis
+            YAxis yAxis = scatterChart.getAxisLeft();
+            yAxis.setAxisMinimum(0f);
+            yAxis.setAxisMaximum(100f);
 
-    private static class CustomXAxisValueFormatter extends ValueFormatter {
-        @Override
-        public String getFormattedValue(float value) {
-            if (value == 0) return "Class 10";
-            else if (value == 1) return "Class 12";
-            else return "";
+            // Set data to the ScatterChart
+            scatterChart.setData(new ScatterData(dataSet));
+            scatterChart.invalidate(); // refresh chart
         }
     }
 }
