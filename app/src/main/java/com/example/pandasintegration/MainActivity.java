@@ -51,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+        //Making the Avg of class 10 and 12
+        TextView classXavg=findViewById(R.id.textview_Xmarks);
+        TextView classXIIavg=findViewById(R.id.textview_XIImarks);
+
+        PyObject Xavg=pyobj.callAttr("class10_avg");
+        classXavg.setText(Xavg.toString());
+
+        PyObject XIIavg=pyobj.callAttr("class12_avg");
+        classXIIavg.setText(XIIavg.toString());
     }
 
     private void showComparison(int position) {
