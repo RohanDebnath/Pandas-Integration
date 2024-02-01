@@ -61,12 +61,17 @@ public class MainActivity extends AppCompatActivity {
         //Making the Avg of class 10 and 12
         TextView classXavg=findViewById(R.id.textview_Xmarks);
         TextView classXIIavg=findViewById(R.id.textview_XIImarks);
+        TextView carricular_activities=findViewById(R.id.textview_CarricularActivity);
 
         PyObject Xavg=pyobj.callAttr("class10_avg");
         classXavg.setText(Xavg.toString());
 
         PyObject XIIavg=pyobj.callAttr("class12_avg");
         classXIIavg.setText(XIIavg.toString());
+
+        PyObject Carricular_Activities =pyobj.callAttr("Carricular_activities");
+        carricular_activities.setText(Carricular_Activities.toString());
+
     }
 
     private void showComparison(int position) {
