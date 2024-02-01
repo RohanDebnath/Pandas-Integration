@@ -36,6 +36,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.textViewXMarks.setText("X Marks: " + details[1]);
         holder.textViewXIIMarks.setText("XII Marks: " + details[2]);
         holder.textViewCurricularActivities.setText("Curricular Activities: " + details[3]);
+        holder.email.setText("Email id: " + details[4]);
     }
 
     @Override
@@ -48,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView textViewXMarks;
         TextView textViewXIIMarks;
         TextView textViewCurricularActivities;
+        TextView email;
         OnItemClickListener onItemClickListener;
 
         public ViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
@@ -58,6 +60,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             textViewXMarks = itemView.findViewById(R.id.textViewXMarks);
             textViewXIIMarks = itemView.findViewById(R.id.textViewXIIMarks);
             textViewCurricularActivities = itemView.findViewById(R.id.textViewCurricularActivities);
+            email = itemView.findViewById(R.id.emailID);
         }
 
         @Override
