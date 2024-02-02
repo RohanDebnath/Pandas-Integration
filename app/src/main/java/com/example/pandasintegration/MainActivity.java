@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         PyObject XIIavg = pyobj.callAttr("class12_avg");
         classXIIavg.setText(XIIavg.toString());
 
-        PyObject Carricular_Activities = pyobj.callAttr("curricular_activities0");
+        PyObject Carricular_Activities = pyobj.callAttr("curricular_activities");
         carricular_activities.setText(Carricular_Activities.toString());
 
         //Creating the newActivity for View of Selected Student
