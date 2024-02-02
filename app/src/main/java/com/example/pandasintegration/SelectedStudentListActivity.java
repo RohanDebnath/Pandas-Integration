@@ -1,11 +1,14 @@
 package com.example.pandasintegration;
+
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SelectedStudentListActivity extends AppCompatActivity {
 
@@ -24,18 +27,23 @@ public class SelectedStudentListActivity extends AppCompatActivity {
 
         // Parse CSV data into a List of Strings
         List<String> studentDetails = Arrays.asList(selectedCSVData.split("\n"));
-
         // Convert studentDetails to a List of Student objects
+
         List<Student> studentList = new ArrayList<>();
         for (int i = 1; i < studentDetails.size(); i++) {
             String studentInfo = studentDetails.get(i);
-            String[] infoArray = studentInfo.split(",");
 
-            // Ensure the array has the correct length
-            if (infoArray.length == 5) {
-                studentList.add(new Student(infoArray[0], infoArray[1], infoArray[2], infoArray[3], infoArray[4]));
+            // Add a null check before splitting
+            if (studentInfo != null) {
+                String[] infoArray = studentInfo.split(",");
+
+                // Ensure the array has the correct length
+                if (infoArray.length == 5) {
+                    studentList.add(new Student(infoArray[0], infoArray[1], infoArray[2], infoArray[3], infoArray[4]));
+                }
             }
         }
+
 
 
         // Set up RecyclerView and Adapter

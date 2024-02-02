@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Showing Selected Student List size
+        TextView Selected_StudentSize=findViewById(R.id.noOfSelected_Student);
+//        PyObject size = pyobj.callAttr("get_length");
+//        Selected_StudentSize.setText(size.toString());
     }
 
     private void showComparison(int position) {
@@ -249,6 +253,12 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("selectedCSVData", selectedCSVData);
         startActivity(intent);
     }
-
+    public  void getNumberOfSelection(View view){
+        TextView Selected_StudentSize=findViewById(R.id.noOfSelected_Student);
+        Python py = Python.getInstance();
+        PyObject pyobj = py.getModule("python_pandas_worksheet");
+        PyObject size = pyobj.callAttr("get_length");
+        Selected_StudentSize.setText(size.toString());
+    }
 
 }
