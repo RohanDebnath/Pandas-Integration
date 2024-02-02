@@ -215,7 +215,8 @@
                             android:textAlignment="textStart"
                             android:textStyle="bold"
                             android:gravity="center"
-                            />
+                            android:clickable="true"
+                            android:onClick="openCurricularActivitiesDialog" />
 
                     </androidx.cardview.widget.CardView>
 

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Python py = Python.getInstance();
         PyObject pyobj = py.getModule("python_pandas_worksheet");
         TextView tv = findViewById(R.id.textview);
-        PyObject obj = pyobj.callAttr("application_recieved");
+        PyObject obj = pyobj.callAttr("application_received");
         PyObject list_obj = pyobj.callAttr("get_application_details");
         tv.setText(obj.toString());
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         PyObject XIIavg = pyobj.callAttr("class12_avg");
         classXIIavg.setText(XIIavg.toString());
 
-        PyObject Carricular_Activities = pyobj.callAttr("Carricular_activities");
+        PyObject Carricular_Activities = pyobj.callAttr("curricular_activities0");
         carricular_activities.setText(Carricular_Activities.toString());
 
         //Creating the newActivity for View of Selected Student
@@ -241,7 +241,8 @@ public class MainActivity extends AppCompatActivity {
                 Python py = Python.getInstance();
                 PyObject pyobj = py.getModule("python_pandas_worksheet");
                 PyObject Selected_Studentobj=pyobj.callAttr("filter_students",classXValue,class12Value,numberOfStudents);
-                selectedCSVData=Selected_Studentobj.toString();
+                PyObject finalDataBase=pyobj.callAttr("merge_dataframes");
+                selectedCSVData=finalDataBase.toString();
                 alertDialog.dismiss();
             }
         });
