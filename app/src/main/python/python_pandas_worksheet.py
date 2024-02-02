@@ -20,3 +20,4 @@ def class12_avg():
 def Carricular_activities():
     df=pd.read_csv(gsheet_Url)
     return f"{df[df['Carricular Activities'] != 'N.A'].shape[0]} Students"
+
