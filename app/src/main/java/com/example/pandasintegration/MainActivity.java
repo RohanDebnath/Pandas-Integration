@@ -1,6 +1,7 @@
 package com.example.pandasintegration;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -249,6 +250,39 @@ public class MainActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
+    public void openCurricularActivitiesDialog(View view) {
+        // Create custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_select_curricular_activities);
+
+        // Get references to the input fields and save button
+        final EditText editTextActivity = dialog.findViewById(R.id.editTextActivity);
+        final EditText editTextNumStudents = dialog.findViewById(R.id.editTextNumStudents);
+        Button btnSave = dialog.findViewById(R.id.btnSaveCA);
+
+        // Set click listener for the save button
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Retrieve values from input fields
+                String activity = editTextActivity.getText().toString();
+                String numStudentsStr = editTextNumStudents.getText().toString();
+                Python py = Python.getInstance();
+                PyObject pyobj = py.getModule("python_pandas_worksheet");
+
+                PyObject Selected_Studentobj=pyobj.callAttr("select_students_by_activity",activity,Integer.parseInt(numStudentsStr));
+                PyObject finalDataBase=pyobj.callAttr("merge_dataframes");
+                selectedCSVData=finalDataBase.toString();
+                openSelectedStudentListActivity();
+                dialog.dismiss();
+            }
+        });
+
+        // Show the dialog
+        dialog.show();
+    }
+
+
     private void openSelectedStudentListActivity() {
         Intent intent = new Intent(this, SelectedStudentListActivity.class);
         intent.putExtra("selectedCSVData", selectedCSVData);

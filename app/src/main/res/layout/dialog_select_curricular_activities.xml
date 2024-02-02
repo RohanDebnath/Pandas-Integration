@@ -6,21 +6,21 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/curricularActivityEditText"
+        android:id="@+id/editTextActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Curricular Activity Name"
-        android:inputType="text" />
+        android:hint="Enter Activity" />
 
     <EditText
-        android:id="@+id/numberOfStudentsEditText"
+        android:id="@+id/editTextNumStudents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Number of Students to Select"
-        android:inputType="number" />
+        android:hint="Enter Number of Students" />
+
     <Button
-        android:id="@+id/saveButtonCA"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnSaveCA"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save" />
+        android:text="Save"
+        android:onClick="saveCurricularActivities" />
 </LinearLayout>
