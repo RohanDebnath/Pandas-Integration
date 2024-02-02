@@ -38,7 +38,6 @@ def curricular_activities():
 
 
 def filter_students(class_x_cutoff, class_xii_cutoff, limit_students=None):
-    global length
     global filtered_df
     df_temp = pd.read_csv(gsheet_Url)
     df_temp = df_temp.sort_values(by=['X Marks', 'XII Marks'], ascending=False)
@@ -46,12 +45,10 @@ def filter_students(class_x_cutoff, class_xii_cutoff, limit_students=None):
 
     if limit_students is not None:
         filtered_df = filtered_df.head(limit_students)
-    length += filtered_df.shape[0]
     return filtered_df.to_csv(index=False)
 
 
 def select_students_by_activity(activity, num_students=None):
-    global length
     global filteredActivity_df
     df_temp = pd.read_csv(gsheet_Url)
     df_temp = df_temp.sort_values(by=['X Marks', 'XII Marks'], ascending=False)
@@ -59,15 +56,20 @@ def select_students_by_activity(activity, num_students=None):
 
     if num_students is not None:
         filteredActivity_df = filteredActivity_df.head(num_students)
-    length += filteredActivity_df.shape[0]
     return filteredActivity_df.to_csv(index=False)
 
 
 def merge_dataframes():
     global filtered_df
     global filteredActivity_df
+    global length
     merged_df = pd.concat([filtered_df, filteredActivity_df], ignore_index=True)
+
+    # Drop duplicates based on all columns
+    merged_df = merged_df.drop_duplicates()
+    length=merged_df.shape[0]
     return merged_df.to_csv(index=False)
+
 
 
 # Example usage:
