@@ -21,3 +21,11 @@ def Carricular_activities():
     df=pd.read_csv(gsheet_Url)
     return f"{df[df['Carricular Activities'] != 'N.A'].shape[0]} Students"
 
+def filter_students(class_x_cutoff, class_xii_cutoff, limit_students=None):
+    df=pd.read_csv(gsheet_Url)
+    filtered_df = df[(df['X Marks'] > class_x_cutoff) & (df['XII Marks'] > class_xii_cutoff)]
+
+    if limit_students is not None:
+        filtered_df = filtered_df.head(limit_students)
+
+    return filtered_df.to_csv(index=False)

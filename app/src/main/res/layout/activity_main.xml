@@ -171,6 +171,9 @@
                             android:textStyle="bold"
                             android:gravity="center"
                             android:textAlignment="textStart"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="openCutoffDialog"
                             />
 
                     </androidx.cardview.widget.CardView>
@@ -188,6 +191,9 @@
                             android:textAlignment="textStart"
                             android:textStyle="bold"
                             android:gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="openStudentDialog"
                             />
 
                     </androidx.cardview.widget.CardView>

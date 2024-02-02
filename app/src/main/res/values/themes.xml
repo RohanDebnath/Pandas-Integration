@@ -14,4 +14,11 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.PandasIntegration.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.PandasIntegration.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.PandasIntegration.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

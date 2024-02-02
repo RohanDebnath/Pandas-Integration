@@ -8,4 +8,5 @@
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
 </menu>
