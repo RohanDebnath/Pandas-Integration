@@ -245,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                 PyObject finalDataBase=pyobj.callAttr("merge_dataframes");
                 selectedCSVData=finalDataBase.toString();
                 alertDialog.dismiss();
+                getNumberOfSelection(v);
             }
         });
 
@@ -274,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                 PyObject finalDataBase=pyobj.callAttr("merge_dataframes");
                 selectedCSVData=finalDataBase.toString();
                 openSelectedStudentListActivity();
+                getNumberOfSelection(v);
                 dialog.dismiss();
             }
         });

@@ -38,13 +38,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/baseline_person_24"
-            android:drawableRight="@drawable/baseline_refresh_24"
             android:text="   Number of Students Selected till now"
             android:textSize="16dp"
             android:textStyle="bold"
             android:padding="4dp"
-            android:clickable="true"
-            android:focusable="true"
             android:onClick="getNumberOfSelection"/>
 
         <LinearLayout
