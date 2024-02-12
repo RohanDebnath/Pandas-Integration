@@ -24,12 +24,13 @@ def get_length():
 
 def class10_avg():
     df_temp = pd.read_csv(gsheet_Url)
-    return f"{df_temp['X Marks'].mean()}%"
+    return "{:.2f}%".format(df_temp['X Marks'].mean())
 
 
 def class12_avg():
     df_temp = pd.read_csv(gsheet_Url)
-    return f"{df_temp['XII Marks'].mean()}%"
+    return "{:.2f}%".format(df_temp['XII Marks'].mean())
+
 
 
 def curricular_activities():
