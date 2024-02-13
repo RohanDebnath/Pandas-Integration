@@ -78,3 +78,4 @@ def merge_dataframes():
 # select_students_by_activity("Swimming", 2)
 # merged_data = merge_dataframes()
 # print(merged_data)
+print(get_application_details())
