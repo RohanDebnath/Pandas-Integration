@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -296,6 +297,13 @@ public class MainActivity extends AppCompatActivity {
         PyObject pyobj = py.getModule("python_pandas_worksheet");
         PyObject size = pyobj.callAttr("get_length");
         Selected_StudentSize.setText(size.toString());
+    }
+
+    public void sendEmails(View view) {
+        Python py = Python.getInstance();
+        PyObject pyobj = py.getModule("python_pandas_worksheet");
+        pyobj.callAttr("send_emails");
+        Toast.makeText(this, "Email has been sent", Toast.LENGTH_SHORT).show();
     }
 
 }

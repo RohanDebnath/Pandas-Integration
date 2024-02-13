@@ -273,6 +273,8 @@
                         android:textAlignment="textStart"
                         android:textStyle="bold"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:onClick="sendEmails"
                         />
 
                 </androidx.cardview.widget.CardView>

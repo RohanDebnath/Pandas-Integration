@@ -1,10 +1,14 @@
 import pandas as pd
+import ssl
+import smtplib
+from email.message import EmailMessage
 
 gsheetId = "1Tfsie3jgw-FrZC03vUB4a2jot8oJfHpR3ftF9jnYT2M"
 sheet_name = "Sheet1"
 length = 0
 filtered_df = pd.DataFrame()
 filteredActivity_df = pd.DataFrame()
+merged_df=pd.DataFrame()
 gsheet_Url = "https://docs.google.com/spreadsheets/d/{}/gviz/tq?tqx=out:csv&sheet={}".format(gsheetId, sheet_name)
 df = pd.read_csv(gsheet_Url, header=1)
 
@@ -64,6 +68,7 @@ def merge_dataframes():
     global filtered_df
     global filteredActivity_df
     global length
+    global merged_df
     merged_df = pd.concat([filtered_df, filteredActivity_df], ignore_index=True)
 
     # Drop duplicates based on all columns
@@ -71,11 +76,41 @@ def merge_dataframes():
     length=merged_df.shape[0]
     return merged_df.to_csv(index=False)
 
+#Email part
+
+# email_sender = 'rohandn887@gmail.com'
+# email_password = 'zflo fybk ylar kftn'
+# subject = "Congratulations!! On Selection"
+
+def send_emails():
+    merge_dataframes()
+    sender_email='rohandn887@gmail.com'
+    sender_password='zflo fybk ylar kftn'
+    subject="Congratulations!! On Selection"
+    global merged_df
+    context = ssl.create_default_context()
+    
+    for index, row in merged_df.iterrows():
+        receiver_email = row['Email']
+        student_name = row['Student Name']
+        if receiver_email == 'abc@gmail.com':
+            continue  # Skip sending email to this address
+        
+        body = f"Dear {student_name} a warm Congratulations as you have selected for our institution."
+        
+        em = EmailMessage()
+        em['From'] = sender_email
+        em['To'] = receiver_email
+        em['Subject'] = subject
+        em.set_content(body)
+        
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(sender_email, sender_password)
+            smtp.sendmail(sender_email, receiver_email, em.as_string())
+            print("Done")
+
 
 
 # Example usage:
-# filter_students(80, 85, 3)
-# select_students_by_activity("Swimming", 2)
-# merged_data = merge_dataframes()
-# print(merged_data)
-print(get_application_details())
+# print(filter_students(80, 85, 5))
+# send_emails()
