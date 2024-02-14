@@ -4,7 +4,7 @@ import smtplib
 from email.message import EmailMessage
 
 gsheetId = "1Tfsie3jgw-FrZC03vUB4a2jot8oJfHpR3ftF9jnYT2M"
-sheet_name = "Sheet1"
+sheet_name = "Sheet2"
 length = 0
 filtered_df = pd.DataFrame()
 filteredActivity_df = pd.DataFrame()
@@ -114,3 +114,4 @@ def send_emails():
 # Example usage:
 # print(filter_students(80, 85, 5))
 # send_emails()
+print(get_application_details())

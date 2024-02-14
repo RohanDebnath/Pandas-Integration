@@ -46,9 +46,14 @@ public class ComparisonActivity extends AppCompatActivity {
 
                 // Skip the header row or any non-numeric values
                 try {
-                    float xMark = Float.parseFloat(details[1]);
-                    float xiiMark = Float.parseFloat(details[2]);
-
+//                    float xMark = Float.parseFloat(details[1]);
+                          String marksXthclass= details[1];
+                          marksXthclass=marksXthclass.substring(1,marksXthclass.length());
+                    float    xMark=Float.parseFloat(marksXthclass);
+//                    float xiiMark = Float.parseFloat(details[2]);
+                    String marksXIIthclass= details[1];
+                    marksXthclass=marksXIIthclass.substring(1,marksXIIthclass.length());
+                    float xiiMark=Float.parseFloat(marksXIIthclass);
                     // Add entry for each student
                     entries.add(new Entry(xMark, xiiMark));
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
